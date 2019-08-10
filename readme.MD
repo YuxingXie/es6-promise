@@ -163,5 +163,20 @@ promise.then(
 
 目前看来我的例子比书上的要生动一些，但是还是请耐心看看书中的例子吧。
 
+#### 1.3. 一个异步操作的结果是返回另一个异步操作
 
+这个议题是作者提出来的，我根本想不到这种操作，请看他的代码：
+```javascript
+ var p1 = new Promise((resolve,reject) =>{/*codes here*/});
+ var p2 = new Promise((resolve,reject) =>{
+     //...
+     resolve(p1);
+ });
+```
+
+以我暂时的理解能力，我决定先略过这段的深入理解。不过，还是要知道，这种写法看似是同步代码，其实p1和p2的pending，resolved和rejected
+的状态是同步的。
+
+现在，我对Promise已经初步了解了。书后面介绍的Promise.prototype.then(),Promise.prototype.catch(),Promise.all(),Promise.race(),Promise.reject(),以及
+两个有用的附加方法等内容，等有时间再来研究。See You!
 
