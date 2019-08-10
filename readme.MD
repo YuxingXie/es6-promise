@@ -147,34 +147,21 @@ promise.then(
 
       });
     }
-    mkCoffeeFun();//这一步，咖啡已经制作出来,实际代码查看src/makeCoffee.js
+    mkCoffeeFun();
 ```
+实际上
+
+    mkCoffeeFun();
+    
+这一步，咖啡已经制作出来,再追溯一下，其实在new Promise(...)的时候咖啡已经制作出来了。
+
+具体代码查看src/makeCoffee.js和rc/instancePromise.js.
 
 把Promise作为一个函数的返回值，然后调用这个函数，是Promise的正确使用方式。它能够启动Promise构造方法中的那个函数。
 
 顺便提醒一下，书上的代码是用settimeout方法作为异步方法调用，如果你看不懂，估计应该看看settimeout这个方法的参数说明。
 
+目前看来我的例子比书上的要生动一些，但是还是请耐心看看书中的例子吧。
 
 
-我假设一个场景，如果今天不是周末，我就喝掉，是周末就分享我的咖啡，代码可以这样写吗？
-```javascript
-    if(!todayIsWeekend){
-        promise.then(
-            function(value){
-                console.log('我要喝掉',value);
-            },
-            function(value) {
-            }
-        );
-    }else{
-        promise.then(
-            function(value){
-                console.log('我要分享',value);
-            },
-            function(value) {
-            }
-        );
-    }
-```
-我想当然是可以的。
 
