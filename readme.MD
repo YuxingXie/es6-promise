@@ -111,5 +111,70 @@ Promise对象代表一个异步操作，有3中状态：
 当然我能够理解，作为框架设计者，必须把个人具体业务(喝掉、分享、冰冻)抽象为resolve行为。但必须要在一个适当的时候，方便的将我
 的想法与框架结合起来。好吧，暂时思考到这里，接着学习。
 
+Promise实例生成后，可以用then方法分别指定Resolved状态和Rejected状态的回调函数。
+```javascript
+promise.then(
+    function(value){
+        //结合我的煮咖啡实例，这个value就是"coffee",这个函数就是我想做的事，喝掉咖啡
+    },
+    function(value) {
+      //那么这里value就是"cokePowder",我想扔掉它
+    }
+);
+```
+从煮咖啡的示例场景看，从煮咖啡到处理产品，我们把它放在了两个地方，煮咖啡的步骤放在Promise构造方法中，而处理它的结果放在then方法中。
+对于所有的异步应用场景，都可以做类似的抽象。
 
+
+好吧，现在我开始煮咖啡了，我发现我居然不会下笔写代码：
+```javascript
+    //我该怎么启动makeCoffee方法来开始煮咖啡？
+```
+书上告诉我大概应该是这样才能启动：
+```javascript
+    function mkCoffeeFun() {
+      return new Promise((resolve, reject) => {
+          //这里异步制作咖啡
+          makeCoffee().result( coffeeOrCokePowder => {
+              if (coffeeOrCokePowder==='coffee'){
+                  console.log(coffeeOrCokePowder,'is made,success!');
+                  resolve('coffee');
+              } else {
+                  console.log(coffeeOrCokePowder,'is made,fail!');
+                  reject('cokePowder');
+              }
+          });      
+
+      });
+    }
+    mkCoffeeFun();//这一步，咖啡已经制作出来,实际代码查看src/makeCoffee.js
+```
+
+把Promise作为一个函数的返回值，然后调用这个函数，是Promise的正确使用方式。它能够启动Promise构造方法中的那个函数。
+
+顺便提醒一下，书上的代码是用settimeout方法作为异步方法调用，如果你看不懂，估计应该看看settimeout这个方法的参数说明。
+
+
+
+我假设一个场景，如果今天不是周末，我就喝掉，是周末就分享我的咖啡，代码可以这样写吗？
+```javascript
+    if(!todayIsWeekend){
+        promise.then(
+            function(value){
+                console.log('我要喝掉',value);
+            },
+            function(value) {
+            }
+        );
+    }else{
+        promise.then(
+            function(value){
+                console.log('我要分享',value);
+            },
+            function(value) {
+            }
+        );
+    }
+```
+我想当然是可以的。
 
