@@ -94,14 +94,22 @@ Promise对象代表一个异步操作，有3中状态：
 
 现在我清晰了一些，但仍然不明白resolve和reject要拿我煮咖啡的产品来干什么。
 
-按照我自己定义的场景，如果产品是咖啡，即resolved，我应该把它喝掉：
+按照我自己定义的场景，如果产品是咖啡，即resolved，我应该把它喝掉或者任何我想的方式：
 ```javascript
-// 我不想要resolve('coffee')，我是要：
+// 我不想要resolve('coffee')，我是要干这些事：
     drink('coffee');//喝掉
+    share('coffee');//分享
+    cold('coffee');//冰冻
 ```
-否则扔掉:
+否则扔掉或其它什么的:
 ```javascript
 // 我不想要reject('cokePowder')，我是要：
     pourOff('cokePowder');//倒掉
+    pigment('cokePowder');//当黑色颜料
+    burn('cokePowder');//烧掉
 ```
+当然我能够理解，作为框架设计者，必须把个人具体业务(喝掉、分享、冰冻)抽象为resolve行为。但必须要在一个适当的时候，方便的将我
+的想法与框架结合起来。好吧，暂时思考到这里，接着学习。
+
+
 
